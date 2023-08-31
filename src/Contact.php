@@ -2,64 +2,65 @@
 
 namespace CT275\Labs;
 
+use PDO;
+
 class Contact
 {
-	private $db;
+    private ?PDO $db;
 
-	private $id = -1;
-	public $name;
-	public $phone;
-	public $notes;
-	public $created_at;
-	public $updated_at;
-	private $errors = [];
+    private int $id = -1;
+    public $name;
+    public $phone;
+    public $notes;
+    public $created_at;
+    public $updated_at;
+    private array $errors = [];
 
-	public function getId()
-	{
-		return $this->id;
-	}
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-	public function __construct($pdo)
-	{
-		$this->db = $pdo;
-	}
+    public function __construct(?PDO $pdo)
+    {
+        $this->db = $pdo;
+    }
 
-	public function fill(array $data)
-	{
-		if (isset($data['name'])) {
-			$this->name = trim($data['name']);
-		}
+    public function fill(array $data): Contact
+    {
+        $this->name = $data['name'] ?? '';
+        $this->phone = $data['phone'] ?? '';
+        $this->notes = $data['notes'] ?? '';
+        return $this;
+    }
 
-		if (isset($data['phone'])) {
-			$this->phone = preg_replace('/\D+/', '', $data['phone']);
-		}
 
-		if (isset($data['notes'])) {
-			$this->notes = trim($data['notes']);
-		}
+    public function getValidationErrors(): array
+    {
+        return $this->errors;
+    }
 
-		return $this;
-	}
+    public function validate(): bool
+    {
+        $name = trim($this->name);
+        if (!$name) {
+            $this->errors['name'] = 'Invalid name.';
+        }
 
-	public function getValidationErrors()
-	{
-		return $this->errors;
-	}
+        $phone = preg_replace('/[^0-9]+/', '', $this->phone);
+        if (
+            strlen($phone) != strlen($this->phone) ||
+            strlen($phone) < 10 ||
+            strlen($phone) > 11
+        ) {
+            $this->errors['phone'] = 'Invalid phone number.';
+        }
 
-	public function validate()
-	{
-		if (!$this->name) {
-			$this->errors['name'] = 'Invalid name.';
-		}
+        $notes = trim($this->notes);
+        if (strlen($notes) > 255) {
+            $this->errors['notes'] = 'Notes must be at most 255 characters.';
+        }
 
-		if (strlen($this->phone) < 10 || strlen($this->phone) > 11) {
-			$this->errors['phone'] = 'Invalid phone number.';
-		}
-
-		if (strlen($this->notes) > 255) {
-			$this->errors['notes'] = 'Notes must be at most 255 characters.';
-		}
-
-		return empty($this->errors);
-	}
+        return empty($this->errors);
+    }
 }

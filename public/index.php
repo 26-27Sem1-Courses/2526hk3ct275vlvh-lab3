@@ -1,78 +1,93 @@
 <?php
-include "../bootstrap.php";
+require_once __DIR__ . '/../bootstrap.php';
+
+include_once __DIR__ . '/../partials/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Contacts</title>
-
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
-	<link href="//cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet">
-	<link href="<?= BASE_URL_PATH . "css/sticky-footer.css" ?>" rel=" stylesheet">
-	<link href="<?= BASE_URL_PATH . "css/font-awesome.min.css" ?>" rel=" stylesheet">
-	<link href="<?= BASE_URL_PATH . "css/animate.css" ?>" rel=" stylesheet">
-</head>
 
 <body>
-	<?php include('../partials/navbar.php') ?>
+    <?php include_once __DIR__ . '/../partials/navbar.php' ?>
 
-	<!-- Main Page Content -->
-	<div class="container">
-		<section id="inner" class="inner-section section">
-			<!-- SECTION HEADING -->
-			<h2 class="section-heading text-center wow fadeIn" data-wow-duration="1s">Contacts</h2>
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3 text-center">
-					<p class="wow fadeIn" data-wow-duration="2s">View your all contacs here.</p>
-				</div>
-			</div>
+    <!-- Main Page Content -->
+    <div class="container">
 
-			<div class="inner-wrapper row">
-				<div class="col-md-12">
+        <?php
+        $subtitle = 'View your all contacs here.';
+        include_once __DIR__ . '/../partials/heading.php';
+        ?>
 
-					<a href="<?= BASE_URL_PATH . 'add.php' ?>" class="btn btn-primary" style="margin-bottom: 30px;">
-						<i class="fa fa-plus"></i> New Contact</a>
+        <div class="row">
+            <div class="col-12">
 
-					<!-- Table Starts Here -->
-					<table id="contacts" class="table table-bordered table-responsive table-striped">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Phone</th>
-								<th>Date Created</th>
-								<th>Notes</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
+                <a href="/add.php" class="btn btn-primary mb-3">
+                    <i class="fa fa-plus"></i> New Contact
+                </a>
 
-						</tbody>
-					</table>
-					<!-- Table Ends Here -->
-				</div>
-			</div>
-		</section>
-	</div>
+                <!-- Table Starts Here -->
+                <table id="contacts" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-	<?php include('../partials/footer.php') ?>
+                    </tbody>
+                </table>
+                <!-- Table Ends Here -->
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-	<script src="//cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-	<script src="<?= BASE_URL_PATH . "js/wow.min.js" ?>"></script>
-	<script>
-		$(document).ready(function() {
-			new WOW().init();
-			$('#contacts').DataTable();
-		});
-	</script>
+                <nav class="d-flex justify-content-center">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a role="button" class="page-link">
+                                <span>&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a role="button" class="page-link">1</a>
+                        </li>
+                        <li class="page-item active">
+                            <a role="button" class="page-link">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a role="button" class="page-link">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a role="button" class="page-link">
+                                <span>&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-confirm" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">Do you want to delete this contact?</div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php include_once __DIR__ . '/../partials/footer.php' ?>
+    <script>
+        $(document).ready(function() {});
+    </script>
 </body>
 
 </html>

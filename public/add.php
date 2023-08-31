@@ -1,100 +1,71 @@
 <?php
-include "../bootstrap.php";
+require_once __DIR__ . '/../bootstrap.php';
+
+include_once __DIR__ . '/../partials/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Contacts</title>
-
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<?= BASE_URL_PATH . "css/sticky-footer.css" ?>" rel=" stylesheet">
-	<link href="<?= BASE_URL_PATH . "css/font-awesome.min.css" ?>" rel=" stylesheet">
-	<link href="<?= BASE_URL_PATH . "css/animate.css" ?>" rel=" stylesheet">
-</head>
 
 <body>
-	<?php include('../partials/navbar.php') ?>
+    <?php include_once __DIR__ . '/../partials/navbar.php' ?>
 
-	<!-- Main Page Content -->
-	<div class="container">
-		<section id="inner" class="inner-section section">
-			<div class="container">
+    <!-- Main Page Content -->
+    <div class="container">
 
-				<!-- SECTION HEADING -->
-				<h2 class="section-heading text-center wow fadeIn" data-wow-duration="1s">Contacts</h2>
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3 text-center">
-						<p class="wow fadeIn" data-wow-duration="2s">Add your contacts here.</p>
-					</div>
-				</div>
+        <?php
+        $subtitle = 'Add your contacts here.';
+        include_once __DIR__ . '/../partials/heading.php';
+        ?>
 
-				<div class="inner-wrapper row">
-					<div class="col-md-12">
+        <div class="row">
+            <div class="col-12">
 
-						<form name="frm" id="frm" action="" method="post" class="col-md-6 col-md-offset-3">
+                <form method="post" class="col-md-6 offset-md-3">
 
-							<!-- Name -->
-							<div class="form-group<?= isset($errors['name']) ? ' has-error' : '' ?>">
-								<label for="name">Name</label>
-								<input type="text" name="name" class="form-control" maxlen="255" id="name" placeholder="Enter Name" value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>" />
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" class="form-control<?= isset($errors['name']) ? ' is-invalid' : '' ?>" maxlen="255" id="name" placeholder="Enter Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>" />
 
-								<?php if (isset($errors['name'])) : ?>
-									<span class="help-block">
-										<strong><?= htmlspecialchars($errors['name']) ?></strong>
-									</span>
-								<?php endif ?>
-							</div>
+                        <?php if (isset($errors['name'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['name'] ?></strong>
+                            </span>
+                        <?php endif ?>
+                    </div>
 
-							<!-- Phone -->
-							<div class="form-group<?= isset($errors['phone']) ? ' has-error' : '' ?>">
-								<label for="phone">Phone Number</label>
-								<input type="text" name="phone" class="form-control" maxlen="255" id="phone" placeholder="Enter Phone" value="<?= isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '' ?>" />
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" name="phone" class="form-control<?= isset($errors['phone']) ? ' is-invalid' : '' ?>" maxlen="255" id="phone" placeholder="Enter Phone" value="<?= isset($_POST['phone']) ? $_POST['phone'] : '' ?>" />
 
-								<?php if (isset($errors['phone'])) : ?>
-									<span class="help-block">
-										<strong><?= htmlspecialchars($errors['phone']) ?></strong>
-									</span>
-								<?php endif ?>
-							</div>
+                        <?php if (isset($errors['phone'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['phone'] ?></strong>
+                            </span>
+                        <?php endif ?>
+                    </div>
 
-							<!-- Description -->
-							<div class="form-group<?= isset($errors['notes']) ? ' has-error' : '' ?>">
-								<label for="description">Notes </label>
-								<textarea name="notes" id="notes" class="form-control" placeholder="Enter notes (maximum character limit: 255)"><?= isset($_POST['notes']) ? htmlspecialchars($_POST['notes']) : '' ?></textarea>
+                    <!-- Notes -->
+                    <div class="form-group">
+                        <label for="notes">Notes </label>
+                        <textarea name="notes" id="notes" class="form-control<?= isset($errors['notes']) ? ' is-invalid' : '' ?>" placeholder="Enter notes (maximum character limit: 255)"><?= isset($_POST['notes']) ? $_POST['notes'] : '' ?></textarea>
 
-								<?php if (isset($errors['notes'])) : ?>
-									<span class="help-block">
-										<strong><?= htmlspecialchars($errors['notes']) ?></strong>
-									</span>
-								<?php endif ?>
-							</div>
+                        <?php if (isset($errors['notes'])) : ?>
+                            <span class="invalid-feedback">
+                                <strong><?= $errors['notes'] ?></strong>
+                            </span>
+                        <?php endif ?>
+                    </div>
 
-							<!-- Submit -->
-							<button type="submit" name="submit" id="submit" class="btn btn-primary">Add Contact</button>
-						</form>
+                    <!-- Submit -->
+                    <button type="submit" name="submit" class="btn btn-primary">Add Contact</button>
+                </form>
 
-					</div>
-				</div>
+            </div>
+        </div>
 
-			</div>
-		</section>
-	</div>
+    </div>
 
-	<?php include('../partials/footer.php') ?>
-
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="<?= BASE_URL_PATH . "js/wow.min.js" ?>"></script>
-	<script>
-		$(document).ready(function() {
-			new WOW().init();
-		});
-	</script>
+    <?php include_once __DIR__ . '/../partials/footer.php' ?>
 </body>
 
 </html>
