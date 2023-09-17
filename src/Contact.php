@@ -47,12 +47,11 @@ class Contact
             $this->errors['name'] = 'Invalid name.';
         }
 
-        $phone = preg_replace('/[^0-9]+/', '', $this->phone);
-        if (
-            strlen($phone) != strlen($this->phone) ||
-            strlen($phone) < 10 ||
-            strlen($phone) > 11
-        ) {
+        $validPhone = preg_match(
+            '/^(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b$/',
+            $this->phone
+        );
+        if (!$validPhone) {
             $this->errors['phone'] = 'Invalid phone number.';
         }
 

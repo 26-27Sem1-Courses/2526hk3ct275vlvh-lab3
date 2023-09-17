@@ -39,6 +39,7 @@ include_once __DIR__ . '/../partials/header.php';
                 </table>
                 <!-- Table Ends Here -->
 
+		<!-- Pagination -->
                 <nav class="d-flex justify-content-center">
                     <ul class="pagination">
                         <li class="page-item">
