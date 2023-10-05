@@ -1,18 +1,18 @@
 <?php
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../src/bootstrap.php';
 
-include_once __DIR__ . '/../partials/header.php';
+include_once __DIR__ . '/../src/partials/header.php';
 ?>
 
 <body>
-    <?php include_once __DIR__ . '/../partials/navbar.php' ?>
+    <?php include_once __DIR__ . '/../src/partials/navbar.php' ?>
 
     <!-- Main Page Content -->
     <div class="container">
 
         <?php
         $subtitle = 'Add your contacts here.';
-        include_once __DIR__ . '/../partials/heading.php';
+        include_once __DIR__ . '/../src/partials/heading.php';
         ?>
 
         <div class="row">
@@ -65,7 +65,7 @@ include_once __DIR__ . '/../partials/header.php';
 
     </div>
 
-    <?php include_once __DIR__ . '/../partials/footer.php' ?>
+    <?php include_once __DIR__ . '/../src/partials/footer.php' ?>
 </body>
 
 </html>
