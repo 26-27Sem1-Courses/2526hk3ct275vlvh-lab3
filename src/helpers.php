@@ -3,7 +3,7 @@
 // Chuyển hướng đến một trang khác
 function redirect(string $location): void
 {
-    header('Location: ' . $location);
+    header('Location: ' . $location, true, 302);
     exit();
 }
 
