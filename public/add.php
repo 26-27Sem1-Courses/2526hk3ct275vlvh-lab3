@@ -23,7 +23,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <!-- Name -->
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control<?= isset($errors['name']) ? ' is-invalid' : '' ?>" maxlen="255" id="name" placeholder="Enter Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>" />
+                        <input type="text" name="name" class="form-control<?= isset($errors['name']) ? ' is-invalid' : '' ?>" maxlen="255" id="name" placeholder="Enter Name" value="<?= isset($_POST['name']) ? html_escape($_POST['name']) : '' ?>" />
 
                         <?php if (isset($errors['name'])) : ?>
                             <span class="invalid-feedback">
@@ -35,7 +35,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <!-- Phone -->
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="text" name="phone" class="form-control<?= isset($errors['phone']) ? ' is-invalid' : '' ?>" maxlen="255" id="phone" placeholder="Enter Phone" value="<?= isset($_POST['phone']) ? $_POST['phone'] : '' ?>" />
+                        <input type="text" name="phone" class="form-control<?= isset($errors['phone']) ? ' is-invalid' : '' ?>" maxlen="255" id="phone" placeholder="Enter Phone" value="<?= isset($_POST['phone']) ? html_escape($_POST['phone']) : '' ?>" />
 
                         <?php if (isset($errors['phone'])) : ?>
                             <span class="invalid-feedback">
@@ -47,7 +47,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <!-- Notes -->
                     <div class="form-group">
                         <label for="notes">Notes </label>
-                        <textarea name="notes" id="notes" class="form-control<?= isset($errors['notes']) ? ' is-invalid' : '' ?>" placeholder="Enter notes (maximum character limit: 255)"><?= isset($_POST['notes']) ? $_POST['notes'] : '' ?></textarea>
+                        <textarea name="notes" id="notes" class="form-control<?= isset($errors['notes']) ? ' is-invalid' : '' ?>" placeholder="Enter notes (maximum character limit: 255)"><?= isset($_POST['notes']) ? html_escape($_POST['notes']) : '' ?></textarea>
 
                         <?php if (isset($errors['notes'])) : ?>
                             <span class="invalid-feedback">
