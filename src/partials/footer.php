@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="container text-center">
-        <p class="text-muted">Copyright &copy; 2023 Web Development Course</p>
+        <p class="text-muted">Copyright &copy; 2024 Web Development Course</p>
     </div>
 </footer>
 
