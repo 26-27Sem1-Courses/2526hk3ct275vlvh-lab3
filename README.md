@@ -1,6 +1,6 @@
 ## CT275: CÔNG NGHỆ WEB - LAB 3
 
-Học kỳ 2, Năm học: 2024-2025
+Học kỳ 3, Năm học: 2024-2025
 
 **Họ tên**: ...
 
@@ -10,23 +10,32 @@ Học kỳ 2, Năm học: 2024-2025
 
 
 
-## Triển khai trên Apache HTTP
+## Triển khai trên nginx
 
 ```
-# C:/xampp/apache/conf/extra/httpd-vhosts.conf
+# D:/Servers/nginx/conf/nginx.conf
 
-<VirtualHost *:80> 
-    DocumentRoot "C:/xampp/htdocs" 
-    ServerName localhost
-</VirtualHost>
+server {
+    listen       80;
+    server_name  ct275-lab3.localhost;
 
-<VirtualHost *:80> 
-    DocumentRoot "D:/mysites/lab3/public"
-    ServerName ct275-lab3.localhost
-    # Set access permission 
-    <Directory "D:/mysites/lab3/public">
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
+    root "D:/mysites/lab3/public";
+    index index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9000;
+        include        fastcgi_params;
+        fastcgi_param  SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
 ```
